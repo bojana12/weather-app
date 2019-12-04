@@ -1,14 +1,14 @@
 import React from "react";
 
-const Form = () => {
+const Form = ({ getWeather, resetForm }) => {
   return (
-    <form>
-      <label for="coname">Country name:</label>
-      <input type="text" id="coname" name="name" />
-      <label for="cname">City name:</label>
-      <input type="text" id="cname" name="name" />
-
-      <button type="submit">Submit</button>
+    <form onSubmit={getWeather}>
+      Country name:
+      <input type="text" name="country" placeholder="Country" required />
+      City name:
+      <input type="text" name="city" placeholder="City" required />
+      <button>Submit</button>
+      <button onClick={resetForm}>Reset the form</button>
     </form>
   );
 };
