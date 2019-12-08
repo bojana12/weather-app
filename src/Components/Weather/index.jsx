@@ -4,15 +4,15 @@ import "./Weather.scss";
 const Weather = ({
   temperature,
   city,
-  country,
   humidity,
   description,
-  reset
+  reset,
+  country
 }) => {
   return (
     <div>
-      {city && country && (
-        <ul className={reset ? "hide" : ""}>
+      {city && (
+        <ul>
           <li>Temperature:{temperature}</li>
           <li>City:{city}</li>
           <li>Country:{country}</li>

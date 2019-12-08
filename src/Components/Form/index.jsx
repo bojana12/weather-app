@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Form = ({ getWeather, resetForm }) => {
+const Form = ({ getWeather, resetForm, onCityChange }) => {
+  const [inputValue, changeInputValue] = useState("");
+
+  const handleSubmit = () => {
+    onCityChange(inputValue);
+  };
+
+  const handleReset = e => {
+    e.preventDefault();
+    resetForm();
+    changeInputValue("");
+  };
+
   return (
-    <form onSubmit={getWeather}>
-      Country name:
-      <input type="text" name="country" placeholder="Country" required />
+    <form onSubmit={getWeather} id="weather-form">
       City name:
-      <input type="text" name="city" placeholder="City" required />
-      <button>Submit</button>
-      <button onClick={resetForm}>Reset the form</button>
+      <input
+        type="text"
+        name="city"
+        placeholder="City"
+        onChange={e => changeInputValue(e.target.value)}
+        value={inputValue}
+        required
+      />
+      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleReset}>Reset the form</button>
     </form>
   );
 };

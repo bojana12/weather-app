@@ -11,15 +11,13 @@ class App extends React.Component {
     city: "",
     country: "",
     humidity: "",
-    description: "",
-    reset: false
+    description: ""
   };
 
   getWeather = e => {
     e.preventDefault();
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric`;
+    const city = this.state.city;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     Axios.get(url).then(response => {
       this.setState({
@@ -29,14 +27,22 @@ class App extends React.Component {
         humidity: response.data.main.humidity,
         description: response.data.weather[0].description
       });
-      console.log(this.state);
     });
   };
 
+  onCityChange = newCity =>
+    this.setState({
+      city: newCity
+    });
+
   resetForm = () => {
-    this.setState(prevState => ({
-      reset: !prevState.reset
-    }));
+    this.setState({
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: ""
+    });
   };
 
   render() {
@@ -44,10 +50,10 @@ class App extends React.Component {
       <React.Fragment>
         <Titles />
         <Form
-          getWeather={this.getWeather}
           city={this.state.city}
-          country={this.state.country}
+          getWeather={this.getWeather}
           resetForm={this.resetForm}
+          onCityChange={this.onCityChange}
         />
         <Weather {...this.state} />
       </React.Fragment>
