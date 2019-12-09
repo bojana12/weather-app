@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-const Form = ({ getWeather, resetForm, onCityChange }) => {
+const Form = ({ getWeather, resetForm }) => {
   const [inputValue, changeInputValue] = useState("");
 
-  const handleSubmit = () => {
-    onCityChange(inputValue);
+  const handleSubmit = e => {
+    e.preventDefault();
+    getWeather(inputValue);
   };
 
   const handleReset = e => {
@@ -14,7 +15,7 @@ const Form = ({ getWeather, resetForm, onCityChange }) => {
   };
 
   return (
-    <form onSubmit={getWeather} id="weather-form">
+    <form onSubmit={handleSubmit} id="weather-form">
       City name:
       <input
         type="text"
@@ -24,7 +25,7 @@ const Form = ({ getWeather, resetForm, onCityChange }) => {
         value={inputValue}
         required
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button type="submit">Submit</button>
       <button onClick={handleReset}>Reset the form</button>
     </form>
   );
