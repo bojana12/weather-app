@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Form.scss";
 
 const Form = ({ getWeather, resetForm }) => {
   const [inputValue, changeInputValue] = useState("");
@@ -15,7 +16,7 @@ const Form = ({ getWeather, resetForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} id="weather-form">
+    <form onSubmit={handleSubmit} className="form-weather">
       City name:
       <input
         type="text"

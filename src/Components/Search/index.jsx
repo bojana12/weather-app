@@ -1,30 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
-
-const cities = [
-  "Belgrade",
-  "Milano",
-  "Paris",
-  "London",
-  "New York",
-  "Brisel",
-  "Vienna",
-  "Budapest",
-  "Prague",
-  "Las Vegas"
-];
-
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0
-    ? []
-    : cities.filter(
-        city => city.toLowerCase().slice(0, inputLength) === inputValue
-      );
-};
+import Axios from "axios";
+import "./Search.scss";
 
 const getSuggestionValue = suggestion => suggestion;
 
@@ -43,7 +21,7 @@ const Search = () => {
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    changeSuggestions(getSuggestions(value));
+    getCities(value);
   };
 
   const onSuggestionsClearRequested = () => {
@@ -56,10 +34,24 @@ const Search = () => {
     onChange: onChange
   };
 
+  const apiKey = "AIzaSyCVfiQ54AOkAtg73o3QXz8etvQCzCAFquw";
+
+  const getCities = inputValue => {
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&key=${apiKey}`;
+
+    Axios.get(url)
+      .then(response => {
+        const cities = response.data.predictions.map(city => city.description);
+        console.log(response.data);
+        changeSuggestions(cities);
+      })
+      .catch(error => console.log(error));
+  };
+
   return (
-    <React.Fragment>
+    <div className="search-container">
       <h1>Weather app</h1>
-      <p>Helps you find weather conditions in chosen Country/City</p>
+      <h3>Helps you find weather conditions in chosen City</h3>
 
       <Autosuggest
         suggestions={suggestions}
@@ -69,7 +61,7 @@ const Search = () => {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
-    </React.Fragment>
+    </div>
   );
 };
 
