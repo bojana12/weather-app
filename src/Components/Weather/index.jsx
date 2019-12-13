@@ -37,7 +37,10 @@ const Weather = () => {
     <div className="result">
       {!errorMsg ? (
         <ul>
-          <li>Temperature:{temperature}</li>
+          <li>
+            <i class="fas fa-temperature-high"></i>
+            Temperature:{temperature}
+          </li>
           <li>City:{city}</li>
           <li>Country:{country}</li>
           <li>Humidity:{humidity}</li>

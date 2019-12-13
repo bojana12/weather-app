@@ -24,5 +24,21 @@
         outline: none;
       }
     }
+
+    div {
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+
+        li {
+          margin-top: 20px;
+          border: 1px solid red;
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
   }
 }

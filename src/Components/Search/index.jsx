@@ -37,12 +37,12 @@ const Search = () => {
   const apiKey = "AIzaSyCVfiQ54AOkAtg73o3QXz8etvQCzCAFquw";
 
   const getCities = inputValue => {
-    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&key=${apiKey}`;
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&types=(cities)&key=${apiKey}`;
 
     Axios.get(url)
       .then(response => {
         const cities = response.data.predictions.map(city => city.description);
-        console.log(response.data);
+        console.log(cities);
         changeSuggestions(cities);
       })
       .catch(error => console.log(error));

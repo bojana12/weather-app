@@ -30,6 +30,10 @@
     &:hover {
       color: lighten(black, 50%);
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .hide {
