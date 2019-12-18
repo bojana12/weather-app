@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import Axios from "axios";
 import "./Search.scss";
@@ -15,6 +15,7 @@ const renderSuggestion = suggestion => (
 const Search = () => {
   const [value, changeValue] = useState("");
   const [suggestions, changeSuggestions] = useState([]);
+  const history = useHistory();
 
   const onChange = (event, { newValue }) => {
     changeValue(newValue);
@@ -26,6 +27,12 @@ const Search = () => {
 
   const onSuggestionsClearRequested = () => {
     changeSuggestions([]);
+  };
+
+  const onSuggestionSelected = (event, { suggestion, method }) => {
+    if (method === "enter") {
+      history.push(`/cities/${suggestion}`);
+    }
   };
 
   const inputProps = {
@@ -60,6 +67,7 @@ const Search = () => {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        onSuggestionSelected={onSuggestionSelected}
       />
     </div>
   );

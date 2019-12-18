@@ -28,7 +28,8 @@
     cursor: pointer;
 
     &:hover {
-      color: lighten(black, 50%);
+      background-color: #0054e6;
+      color: white;
     }
 
     &:focus {

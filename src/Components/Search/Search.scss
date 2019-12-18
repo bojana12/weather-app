@@ -5,17 +5,14 @@
   margin-top: 50px;
   color: white;
 
-  a {
-    color: white;
-  }
-
-  div {
+  .react-autosuggest__container {
     width: 250px;
-    height: 20px;
+    height: 100%;
+
     input {
       width: 100%;
       height: 100%;
-      padding: 8px 5px;
+      padding: 15px 10px;
       border-radius: 3px;
       border: 1px solid white;
       font-size: 14px;
@@ -25,19 +22,49 @@
       }
     }
 
-    div {
-      ul {
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
+    .react-autosuggest__suggestions-list {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      list-style-type: none;
+      border-radius: 3px;
 
-        li {
-          margin-top: 20px;
-          border: 1px solid red;
-          a {
-            text-decoration: none;
-          }
+      &:hover {
+        color: black;
+      }
+
+      .react-autosuggest__suggestion {
+        padding: 15px 10px;
+        width: 100%;
+        border: 1px solid white;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #0054e6;
         }
+        &:first-child {
+          margin-top: 20px;
+        }
+        &:nth-child(even) {
+          border-top: 0;
+          border-bottom: 0;
+        }
+        &:last-child {
+          border-bottom: 1px solid white;
+        }
+        a {
+          text-decoration: none;
+          color: white;
+        }
+      }
+      .react-autosuggest__suggestion--highlighted {
+        background-color: #0054e6;
+      }
+      .react-autosuggest__suggestion-match {
+        color: #0054e6;
+        font-weight: bold;
       }
     }
   }
