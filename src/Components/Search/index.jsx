@@ -17,7 +17,7 @@ const Search = () => {
   const [suggestions, changeSuggestions] = useState([]);
   const history = useHistory();
 
-  const onChange = (event, { newValue }) => {
+  const onChange = (event, { newValue, method }) => {
     changeValue(newValue);
   };
 
@@ -38,7 +38,8 @@ const Search = () => {
   const inputProps = {
     placeholder: "City...",
     value,
-    onChange: onChange
+    onChange: onChange,
+    autoFocus: true
   };
 
   const apiKey = "AIzaSyCVfiQ54AOkAtg73o3QXz8etvQCzCAFquw";
@@ -68,6 +69,7 @@ const Search = () => {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
         onSuggestionSelected={onSuggestionSelected}
+        highlightFirstSuggestion={true}
       />
     </div>
   );

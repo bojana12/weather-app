@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import LocationCityIcon from "@material-ui/icons/LocationCity";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import PublicIcon from "@material-ui/icons/Public";
+import OpacityIcon from "@material-ui/icons/Opacity";
+import CloudQueueIcon from "@material-ui/icons/CloudQueue";
 import Axios from "axios";
 import "./Weather.scss";
 
@@ -25,7 +30,10 @@ const Weather = () => {
       })
       .catch(error => {
         console.log(error);
-        changeErrorMsg(error.response.data.message);
+        const errorMsg = error.response.data.message;
+        const capErrorMsg =
+          errorMsg.charAt(0).toUpperCase() + errorMsg.slice(1);
+        changeErrorMsg(capErrorMsg);
       });
   };
 
@@ -36,15 +44,38 @@ const Weather = () => {
   return (
     <div className="result">
       {!errorMsg ? (
-        <ul>
-          <li>
-            <i class="fas fa-temperature-high"></i>
-            Temperature:{temperature}
-          </li>
-          <li>City:{city}</li>
-          <li>Country:{country}</li>
-          <li>Humidity:{humidity}</li>
-          <li>Description:{description}</li>
+        <ul className="result-list">
+          <div>
+            <WbSunnyIcon />
+            <li>
+              Temperature:
+              <span className="result-value">{temperature} &#x2103;</span>
+            </li>
+          </div>
+          <div>
+            <LocationCityIcon />
+            <li>
+              City:<span className="result-value">{city}</span>
+            </li>
+          </div>
+          <div>
+            <PublicIcon />
+            <li>
+              Country:<span className="result-value">{country}</span>
+            </li>
+          </div>
+          <div>
+            <OpacityIcon />
+            <li>
+              Humidity:<span className="result-value">{humidity}</span>
+            </li>
+          </div>
+          <div>
+            <CloudQueueIcon />
+            <li>
+              Description:<span className="result-value">{description}</span>
+            </li>
+          </div>
         </ul>
       ) : (
         <p>{errorMsg}</p>
