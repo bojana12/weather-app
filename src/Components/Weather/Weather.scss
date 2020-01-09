@@ -10,7 +10,7 @@
     padding: 0;
     margin: 0;
 
-    div {
+    .result-item {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
@@ -22,6 +22,11 @@
       .result-value {
         margin-left: 5px;
         color: #4d94ff;
+      }
+
+      svg {
+        width: 25px;
+        height: 20px;
       }
     }
   }

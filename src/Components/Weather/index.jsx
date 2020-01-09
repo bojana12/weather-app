@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
-import PublicIcon from "@material-ui/icons/Public";
-import OpacityIcon from "@material-ui/icons/Opacity";
-import CloudQueueIcon from "@material-ui/icons/CloudQueue";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Axios from "axios";
 import "./Weather.scss";
 
@@ -25,7 +21,8 @@ const Weather = () => {
           city: response.data.name,
           country: response.data.sys.country,
           humidity: response.data.main.humidity,
-          description: response.data.weather[0].description
+          description: response.data.weather[0].description,
+          feelsLike: response.data.main.feels_like
         });
       })
       .catch(error => {
@@ -39,41 +36,57 @@ const Weather = () => {
 
   useEffect(getWeather, [city]);
 
-  const { temperature, country, humidity, description } = weatherData;
+  const {
+    temperature,
+    country,
+    humidity,
+    description,
+    feelsLike
+  } = weatherData;
 
   return (
     <div className="result">
       {!errorMsg ? (
         <ul className="result-list">
-          <div>
-            <WbSunnyIcon />
+          <div className="result-item">
+            <FontAwesomeIcon icon="temperature-high" />
             <li>
               Temperature:
               <span className="result-value">{temperature} &#x2103;</span>
             </li>
           </div>
-          <div>
-            <LocationCityIcon />
+          <div className="result-item">
+            <FontAwesomeIcon icon="city" />
             <li>
               City:<span className="result-value">{city}</span>
             </li>
           </div>
-          <div>
-            <PublicIcon />
+          <div className="result-item">
+            <FontAwesomeIcon icon="globe" />
             <li>
               Country:<span className="result-value">{country}</span>
             </li>
           </div>
-          <div>
-            <OpacityIcon />
+          <div className="result-item">
+            <FontAwesomeIcon icon="water" />
             <li>
               Humidity:<span className="result-value">{humidity}</span>
             </li>
           </div>
-          <div>
-            <CloudQueueIcon />
+          <div className="result-item">
+            <FontAwesomeIcon icon="cloud-sun-rain" />
             <li>
               Description:<span className="result-value">{description}</span>
+            </li>
+          </div>
+          <div className="result-item">
+            {feelsLike >= 5 ? (
+              <FontAwesomeIcon icon="smile" />
+            ) : (
+              <FontAwesomeIcon icon="frown" />
+            )}
+            <li>
+              Feels-like:<span className="result-value">{feelsLike}</span>
             </li>
           </div>
         </ul>

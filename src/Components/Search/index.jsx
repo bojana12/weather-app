@@ -4,13 +4,15 @@ import Autosuggest from "react-autosuggest";
 import Axios from "axios";
 import "./Search.scss";
 
-const getSuggestionValue = suggestion => suggestion;
+const getSuggestionValue = suggestion => suggestion.text;
 
-const renderSuggestion = suggestion => (
-  <Link to={`/cities/${suggestion}`}>
-    <div>{suggestion}</div>
-  </Link>
-);
+const renderSuggestion = suggestion => {
+  return (
+    <Link to={`/cities/${suggestion.text}`}>
+      <div>{suggestion.text}</div>
+    </Link>
+  );
+};
 
 const Search = () => {
   const [value, changeValue] = useState("");
@@ -31,7 +33,7 @@ const Search = () => {
 
   const onSuggestionSelected = (event, { suggestion, method }) => {
     if (method === "enter") {
-      history.push(`/cities/${suggestion}`);
+      history.push(`/cities/${suggestion.text}`);
     }
   };
 
@@ -46,11 +48,12 @@ const Search = () => {
 
   const getCities = inputValue => {
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&types=(cities)&key=${apiKey}`;
-
     Axios.get(url)
       .then(response => {
-        const cities = response.data.predictions.map(city => city.description);
-        console.log(cities);
+        const cities = response.data.predictions.map(city => ({
+          id: city.id,
+          text: city.description
+        }));
         changeSuggestions(cities);
       })
       .catch(error => console.log(error));
