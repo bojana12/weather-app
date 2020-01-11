@@ -2,10 +2,17 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  font-family: "Roboto", "Arial";
-  background: url("./Images/weather.jpg");
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: url("./Images/weather.jpg") no-repeat center center fixed;
   background-size: cover;
+  font-family: "Roboto", "Arial";
   font-size: 14px;
 }
 

@@ -1,11 +1,17 @@
 .result {
-  display: flex;
-  flex-direction: column;
-  margin: 50px 0 0 100px;
+  display: grid;
+  grid-template-columns: 1fr 500px 1fr 1fr;
+  grid-template-rows: 2;
+  padding: 70px 0 0 10px;
   color: white;
   font-size: 16px;
 
+  @media screen and (max-width: 425px) {
+    grid-template-columns: 10px 1fr;
+  }
+
   .result-list {
+    grid-column: 2;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -13,7 +19,7 @@
     .result-item {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 50px;
 
       li {
         margin-left: 10px;
@@ -21,13 +27,24 @@
 
       .result-value {
         margin-left: 5px;
-        color: #4d94ff;
+        color: #0054e6;
       }
 
       svg {
         width: 25px;
         height: 20px;
       }
+    }
+  }
+
+  .back {
+    grid-column: 2;
+    grid-row: 2;
+
+    @media screen and (max-width: 425px) {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
     }
   }
 

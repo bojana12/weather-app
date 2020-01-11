@@ -26,7 +26,6 @@ const Weather = () => {
         });
       })
       .catch(error => {
-        console.log(error);
         const errorMsg = error.response.data.message;
         const capErrorMsg =
           errorMsg.charAt(0).toUpperCase() + errorMsg.slice(1);
@@ -94,7 +93,7 @@ const Weather = () => {
         <p>{errorMsg}</p>
       )}
 
-      <Link to="/">
+      <Link to="/" className="back">
         <button className="back-button">Back to Home Page</button>
       </Link>
     </div>
