@@ -1,5 +1,6 @@
 {
   "name": "weather-app",
+  "homepage": "http://bojana12.github.io/weather-app/build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
