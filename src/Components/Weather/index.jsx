@@ -15,14 +15,14 @@ const Weather = () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     Axios.get(url)
-      .then(response => {
+      .then(({ data }) => {
         changeWeatherData({
-          temperature: response.data.main.temp,
-          city: response.data.name,
-          country: response.data.sys.country,
-          humidity: response.data.main.humidity,
-          description: response.data.weather[0].description,
-          feelsLike: response.data.main.feels_like
+          temperature: data.main.temp,
+          city: data.name,
+          country: data.sys.country,
+          humidity: data.main.humidity,
+          description: data.weather[0].description,
+          feelsLike: data.main.feels_like
         });
       })
       .catch(error => {
@@ -90,7 +90,7 @@ const Weather = () => {
           </div>
         </ul>
       ) : (
-        <p>{errorMsg}</p>
+        <p className="error-msg">{errorMsg}</p>
       )}
 
       <Link to="/" className="back">

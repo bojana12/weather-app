@@ -27,12 +27,8 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
-          <Search />
-        </Route>
-        <Route path="/cities/:city">
-          <Weather />
-        </Route>
+        <Route path="/" exact component={Search} />
+        <Route path="/cities/:city" component={Weather} />
       </Switch>
     </Router>
   );

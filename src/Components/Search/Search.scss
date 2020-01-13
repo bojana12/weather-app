@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .search-container {
   display: flex;
   flex-direction: column;
@@ -42,7 +44,7 @@
         text-decoration: none;
 
         &:hover {
-          background-color: #0054e6;
+          background-color: $primary-blue;
         }
         &:first-child {
           margin-top: 20px;
@@ -60,10 +62,10 @@
         }
       }
       .react-autosuggest__suggestion--highlighted {
-        background-color: #0054e6;
+        background-color: $primary-blue;
       }
       .react-autosuggest__suggestion-match {
-        color: #0054e6;
+        color: $primary-blue;
         font-weight: bold;
       }
     }

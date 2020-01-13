@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .result {
   display: grid;
   grid-template-columns: 1fr 500px 1fr 1fr;
@@ -37,6 +39,14 @@
     }
   }
 
+  .error-msg {
+    grid-column: 2;
+
+    @media screen and (max-width: 425px) {
+      text-align: center;
+    }
+  }
+
   .back {
     grid-column: 2;
     grid-row: 2;
@@ -61,7 +71,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #0054e6;
+      background-color: $primary-blue;
       color: white;
     }
 

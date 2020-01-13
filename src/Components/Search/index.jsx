@@ -19,7 +19,7 @@ const Search = () => {
   const [suggestions, changeSuggestions] = useState([]);
   const history = useHistory();
 
-  const onChange = (event, { newValue }) => {
+  const onChange = (_, { newValue }) => {
     changeValue(newValue);
   };
 
@@ -31,7 +31,7 @@ const Search = () => {
     changeSuggestions([]);
   };
 
-  const onSuggestionSelected = (event, { suggestion, method }) => {
+  const onSuggestionSelected = (_, { suggestion, method }) => {
     if (method === "enter") {
       history.push(`/cities/${suggestion}`);
     }
@@ -53,7 +53,7 @@ const Search = () => {
         const cities = response.data.predictions.map(city => city.description);
         changeSuggestions(cities);
       })
-      .catch(error => console.log(error));
+      .catch(() => changeSuggestions([]));
   };
 
   return (
@@ -71,6 +71,7 @@ const Search = () => {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
         onSuggestionSelected={onSuggestionSelected}
+        alwaysRenderSuggestions={true}
         highlightFirstSuggestion={true}
       />
     </div>
