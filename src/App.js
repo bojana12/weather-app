@@ -25,7 +25,7 @@ library.add(
 
 const App = () => {
   return (
-    <Router>
+    <Router base={process.env.PUBLIC_URL}>
       <Switch>
         <Route path="/" exact component={Search} />
         <Route path="/cities/:city" component={Weather} />
